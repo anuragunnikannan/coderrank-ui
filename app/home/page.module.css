@@ -4,4 +4,78 @@
     gap: 20px;
     padding: 10px 20px;
     min-height: calc(100vh - 80px);
+    container-type: inline-size;
+}
+
+.problems_container {
+    display: flex;
+    gap: 20px;
+}
+
+.filter_btn_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter_btn {
+    align-self: flex-end;
+    display: none;
+}
+
+.filter_container {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter_container_dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cards_container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.cards_container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.cards_container {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.card_item_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+@container (max-width: 850px) {
+    .filter_btn {
+        display: block;
+    }
+
+    .filter_container {
+        display: none;
+    }
+
+    .cards_container {
+        width: 100%;
+    }
 }

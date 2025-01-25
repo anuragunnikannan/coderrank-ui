@@ -1,10 +1,15 @@
 "use client";
-import { createTheme, ThemeProvider } from '@mui/material';
-import React, { createContext, useState } from 'react'
+import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material';
+import React, { createContext, useEffect, useState } from 'react'
 export const ModeContext = createContext();
 
 export const CustomThemeProvider = ({ children }) => {
-    const [mode, setMode] = useState("light");
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const [mode, setMode] = useState(prefersDarkMode ? "dark" : "light");
+
+    useEffect(() => {
+        setMode(prefersDarkMode ? "dark" : "light");
+    }, [prefersDarkMode]);
 
     const lightTheme = createTheme({
         typography: {
