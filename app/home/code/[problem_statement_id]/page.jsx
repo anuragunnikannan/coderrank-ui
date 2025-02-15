@@ -66,7 +66,7 @@ const page = () => {
 				"Content-Type": "application/json"
 			}
 		}).then((res) => {
-			setOutput(res?.data?.output);
+			setOutput(res?.data);
 			setLoaderOpen(false);
 		})
 			.catch((err) => {
