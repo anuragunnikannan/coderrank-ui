@@ -11,10 +11,13 @@ import { api } from '@/utils/apiFile';
 import Cookies from 'js-cookie';
 import { useParams } from 'next/navigation';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
 
 	const params = useParams();
+
+	handleClientRequest();
 
 	const problem_statement_id = params.problem_statement_id;
 

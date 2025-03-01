@@ -6,12 +6,14 @@ import styles from "./page.module.css";
 import { api } from '@/utils/apiFile';
 import { Delete, Save } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
+import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
     const params = useParams();
     const router = useRouter();
 
     const user_id = params.user_id;
+    handleClientRequest();
 
     const { register, control, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {

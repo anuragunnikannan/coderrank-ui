@@ -6,6 +6,7 @@ import { api } from '@/utils/apiFile';
 import CustomDataGrid from '@/app/components/CustomDataGrid/CustomDataGrid';
 import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/navigation';
+import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
 
@@ -15,6 +16,8 @@ const page = () => {
     const [alertOpen, setAlertOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [severity, setSeverity] = useState("success");
+
+    handleClientRequest();
 
     const columns = ["Username", "Full name", "Phone no.", "Email", "Admin User", "No. of times logged in", "Problems Solved", "Actions"];
 

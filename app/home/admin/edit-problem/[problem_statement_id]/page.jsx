@@ -6,12 +6,15 @@ import styles from "./page.module.css";
 import { Add, Delete, Info, Save } from "@mui/icons-material";
 import { api } from "@/utils/apiFile";
 import { useParams, useRouter } from "next/navigation";
+import { handleClientRequest } from "@/utils/routeProtection";
 
 const page = () => {
 
     const params = useParams();
     const router = useRouter();
     const problemStatementId = params.problem_statement_id;
+
+    handleClientRequest();
 
     const [alertOpen, setAlertOpen] = useState(false);
     const [message, setMessage] = useState("");

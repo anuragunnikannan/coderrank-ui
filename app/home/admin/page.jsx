@@ -4,8 +4,10 @@ import styles from "./page.module.css";
 import Link from 'next/link';
 import PeopleIcon from '@mui/icons-material/People';
 import QuizIcon from '@mui/icons-material/Quiz';
+import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
+    handleClientRequest();
     return (
         <>
             <Box className={styles.main_container} sx={{ backgroundColor: "background", color: "textColor" }}>

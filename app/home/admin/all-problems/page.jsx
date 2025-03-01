@@ -7,6 +7,7 @@ import { api } from '@/utils/apiFile';
 import { useRouter } from 'next/navigation';
 import EditIcon from '@mui/icons-material/Edit';
 import { Add } from '@mui/icons-material';
+import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
 
@@ -15,6 +16,8 @@ const page = () => {
     const [alertOpen, setAlertOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [severity, setSeverity] = useState("success");
+
+    handleClientRequest();
 
     const columns = ["Title", "Tags", "Difficulty", "Action"]
 
