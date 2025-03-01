@@ -4,7 +4,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { api } from '@/utils/apiFile';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from "./Login.module.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -13,6 +13,7 @@ const Login = ({ setIsLogin, setIsError, setOpen, setMessage }) => {
     const formRef = useRef();
 
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const onLoginClick = () => {
         const formData = formRef.current;
@@ -27,10 +28,19 @@ const Login = ({ setIsLogin, setIsError, setOpen, setMessage }) => {
             Cookies.set("accessToken", res?.data?.access_token, { expires: 1 / 48 });
             Cookies.set("isLoggedIn", "true", { expires: 1 / 48 });
 
-            if (res?.data?.admin_user)
-                router.push("/home/admin")
-            else
-                router.push("/home");
+            const redirectUrl = searchParams.get("redirect_url")
+            if (res?.data?.admin_user) {
+                if (redirectUrl)
+                    router.push(redirectUrl);
+                else
+                    router.push("/home/admin")
+            }
+            else {
+                if (redirectUrl)
+                    router.push(redirectUrl);
+                else
+                    router.push("/home");
+            }
         })
             .catch((err) => {
                 setMessage(err?.response?.data?.message);

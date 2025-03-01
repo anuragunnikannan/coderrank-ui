@@ -18,7 +18,7 @@ const page = () => {
 
     return (
         <>
-            <Box className={styles.container}>
+            <Box className={styles.container} sx={{ backgroundColor: "background", color: "textColor" }}>
                 <Box className={styles.hero}>
                     <Box className={styles.heroText}>
                         <Typography variant="h2" fontWeight={900}>CoderRank</Typography>
@@ -39,7 +39,7 @@ const page = () => {
 
                         <Box className={styles.btn_container}>
                             <Button variant="contained" sx={{ fontSize: '20px', height: "48px", fontWeight: "bold" }} onClick={() => router.push("/home")}>Try Now</Button>
-                            <Button variant="contained" color="success" sx={{ fontSize: '20px', height: "48px", fontWeight: "bold" }} onClick={handleLoginClick}>Login</Button>
+                            <Button variant="contained" sx={{ backgroundColor: "success.main", fontSize: '20px', height: "48px", fontWeight: "bold" }} onClick={handleLoginClick}>Login</Button>
                         </Box>
                     </Box>
 
@@ -55,17 +55,17 @@ const page = () => {
                     </Box>
 
                     <Box className={styles.cards}>
-                        <Box className={styles.card}>
+                        <Box className={styles.card} sx={{ backgroundColor: "secondaryBackground" }}>
                             <Typography variant="h5" fontWeight={"bold"}>Highly Modular</Typography>
                             <Typography>Customize the platform according to your needs.</Typography>
                         </Box>
 
-                        <Box className={styles.card}>
+                        <Box className={styles.card} sx={{ backgroundColor: "secondaryBackground" }}>
                             <Typography variant="h5" fontWeight={"bold"}>Vast Language Support</Typography>
                             <Typography>Supports all major programming languages, with a future scope to add more</Typography>
                         </Box>
 
-                        <Box className={styles.card}>
+                        <Box className={styles.card} sx={{ backgroundColor: "secondaryBackground" }}>
                             <Typography variant="h5" fontWeight={"bold"}>Open-Source</Typography>
                             <Typography>For all the developers out there, tinker as you like</Typography>
                         </Box>
@@ -77,12 +77,12 @@ const page = () => {
                         <Typography variant="h4" fontWeight={900}>Supported Languages</Typography>
                     </Box>
                     <Box className={styles.cards}>
-                        <Box className={styles.card}>
+                        <Box className={styles.card} sx={{ backgroundColor: "secondaryBackground" }}>
                             <Typography variant="h5" fontWeight={"bold"}>Java</Typography>
                             <Typography>Java is a versatile, object-oriented programming language designed for cross-platform compatibility and high performance.</Typography>
                         </Box>
 
-                        <Box className={styles.card}>
+                        <Box className={styles.card} sx={{ backgroundColor: "secondaryBackground" }}>
                             <Typography variant="h5" fontWeight={"bold"}>Python</Typography>
                             <Typography>Python is a dynamic, high-level programming language known for its simplicity, readability, and versatility in various domains.</Typography>
                         </Box>

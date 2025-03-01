@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material'
+import { Avatar, Box, Button, Menu, MenuItem, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import styles from "./Navbar.module.css"
 import { ModeContext } from '@/app/CustomThemeProvider'
@@ -8,7 +8,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { api } from '@/utils/apiFile';
 import Cookies from 'js-cookie';
 import { AccountCircle, Logout } from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navbar = () => {
 
@@ -19,6 +19,7 @@ const Navbar = () => {
     const open = Boolean(anchorEl);
 
     const router = useRouter();
+    const pathname = usePathname();
 
     const toggleTheme = () => {
         setMode(mode === "light" ? "dark" : "light");
@@ -67,6 +68,10 @@ const Navbar = () => {
             },
             children: initials,
         };
+    }
+
+    const handleLoginClick = () => {
+        router.push(`/auth?redirect_url=${pathname}`);
     }
 
     const logout = () => {
@@ -132,7 +137,9 @@ const Navbar = () => {
                             {...stringAvatar(userData?.user_name)}
                             onClick={(e) => setAnchorEl(e.currentTarget)}
                         />
-                        : null}
+                        :
+                        <Button variant="contained" sx={{ backgroundColor: "success.main", fontWeight: "bold" }} onClick={handleLoginClick}>Login</Button>
+                    }
                 </Box>
 
             </Box>
