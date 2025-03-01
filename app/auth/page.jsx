@@ -1,6 +1,6 @@
 "use client";
 import { Alert, Box, Snackbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import styles from "./page.module.css";
 import SignUp from "../components/SignUp/SignUp";
 import Login from "../components/Login/Login";
@@ -32,12 +32,14 @@ const page = () => {
 
             <Box className={styles.codeAnimation}>
                 {isLogin ? (
-                    <Login
-                        setIsError={setIsError}
-                        setMessage={setMessage}
-                        setOpen={setOpen}
-                        setIsLogin={setIsLogin}
-                    />
+                    <Suspense>
+                        <Login
+                            setIsError={setIsError}
+                            setMessage={setMessage}
+                            setOpen={setOpen}
+                            setIsLogin={setIsLogin}
+                        />
+                    </Suspense>
                 ) : (
                     <SignUp
                         setIsError={setIsError}

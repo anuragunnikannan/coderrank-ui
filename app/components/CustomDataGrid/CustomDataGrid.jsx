@@ -72,7 +72,7 @@ const CustomDataGrid = ({ data, columns, rowsPerPage = 5 }) => {
             <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle sx={{ backgroundColor: "background", fontWeight: "bold" }}>Sort</DialogTitle>
 
-                <DialogContent sx={{ width: "300px", backgroundColor: "background" }}>
+                <DialogContent sx={{ width: "250px", backgroundColor: "background" }}>
                     <Box className={styles.selection_container}>
                         <Select size='small' select sx={{ width: "100%" }} value={column} onChange={(e) => setColumn(e.target.value)} inputProps={{
                             MenuProps: {

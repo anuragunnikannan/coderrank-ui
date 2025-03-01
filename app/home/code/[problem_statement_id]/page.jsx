@@ -52,14 +52,14 @@ const page = () => {
 			data = {
 				code: codeRef.current,
 				input: input,
-				language_id: language.language_id
+				language_id: language?.language_id
 			}
 		}
 		else {
 			data = {
 				code: codeRef.current,
 				input: input,
-				language_id: language.language_id,
+				language_id: language?.language_id,
 				guest_id: Cookies.get("guest_id")
 			}
 		}
@@ -69,7 +69,7 @@ const page = () => {
 				"Content-Type": "application/json"
 			}
 		}).then((res) => {
-			setOutput(res?.data?.output);
+			setOutput(res?.data);
 			setLoaderOpen(false);
 		})
 			.catch((err) => {
@@ -305,7 +305,7 @@ const page = () => {
 						</Box>
 						<Box className={styles.editor}>
 							<Editor
-								language={language.language_name?.toLowerCase()}
+								language={language?.language_name?.toLowerCase()}
 								theme={mode === "light" ? "vs-light" : "vs-dark"}
 								value={code}
 								onChange={handleChange}
