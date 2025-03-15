@@ -296,7 +296,7 @@ const page = () => {
 								</Select>
 
 								<Button variant="contained" sx={{ display: "flex", gap: "5px", fontWeight: "bold" }} onClick={runCode} title="Run">
-									<PlayArrowIcon /> Run Code
+									<PlayArrowIcon /> Run
 								</Button>
 								<Button variant="contained" sx={{ display: "flex", gap: "5px", fontWeight: "bold" }} color='success' disabled={!enableSubmit} title="Submit" onClick={submitCode}>
 									<BackupIcon /> Submit

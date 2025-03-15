@@ -144,17 +144,6 @@ const page = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Box className={styles.header}>
                         <Typography variant="h5" sx={{ fontWeight: "bold" }}>Edit User</Typography>
-                        <Box className={styles.btn_container}>
-                            <Button variant="contained" sx={{ backgroundColor: "error.main", fontWeight: "bold" }} onClick={handleDelete} disabled={isDisabled}>
-                                <Delete />
-                                Delete
-                            </Button>
-
-                            <Button type="submit" variant="contained" sx={{ backgroundColor: "primary.main", fontWeight: "bold" }} disabled={isDisabled}>
-                                <Save />
-                                Submit
-                            </Button>
-                        </Box>
                     </Box>
 
                     <Box className={styles.details_container} sx={{ backgroundColor: "secondaryBackground" }}>
@@ -199,7 +188,19 @@ const page = () => {
                             />
                         </Box>
                     </Box>
+
                 </form>
+                <Box className={styles.btn_container}>
+                    <Button variant="contained" sx={{ backgroundColor: "error.main", fontWeight: "bold" }} onClick={handleDelete} disabled={isDisabled}>
+                        <Delete />
+                        Delete
+                    </Button>
+
+                    <Button type="submit" variant="contained" sx={{ backgroundColor: "primary.main", fontWeight: "bold" }} disabled={isDisabled}>
+                        <Save />
+                        Submit
+                    </Button>
+                </Box>
             </Box>
         </>
     )

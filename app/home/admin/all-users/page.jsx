@@ -47,7 +47,7 @@ const page = () => {
             problem_solved_count,
             actions: (
                 <>
-                    <Button variant="contained" onClick={() => router.push(`/home/admin/edit-user/${user_id}`)}>
+                    <Button variant="contained" size="small" onClick={() => router.push(`/home/admin/edit-user/${user_id}`)}>
                         <EditIcon />
                     </Button>
                 </>

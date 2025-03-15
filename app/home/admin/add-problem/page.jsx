@@ -104,10 +104,6 @@ const page = () => {
                 >
                     <Box className={styles.header}>
                         <Typography variant="h5" sx={{ fontWeight: "bold" }}>Add Problem Statement</Typography>
-                        <Button type="submit" sx={{ fontWeight: "bold" }} variant="contained" disabled={isDisabled}>
-                            <Save />
-                            Save
-                        </Button>
                     </Box>
 
                     <Box className={styles.form_container} sx={{ backgroundColor: "secondaryBackground" }}>
@@ -275,6 +271,13 @@ const page = () => {
                                 <Add /> Add Test Case
                             </Button>
                         </Box>
+                    </Box>
+
+                    <Box className={styles.btn_container}>
+                        <Button type="submit" sx={{ fontWeight: "bold" }} variant="contained" disabled={isDisabled}>
+                            <Save />
+                            Save
+                        </Button>
                     </Box>
                 </form>
             </Box >

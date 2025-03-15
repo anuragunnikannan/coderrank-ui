@@ -123,12 +123,12 @@ const CustomDataGrid = ({ data, columns, rowsPerPage = 5 }) => {
             </Box>
 
             <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+                <Table size='small' aria-label="simple table">
                     <TableHead sx={{ backgroundColor: "primary.main" }}>
                         <TableRow>
                             {columns?.map((r, i) => {
                                 return (
-                                    <TableCell key={i} sx={{ color: "white", fontWeight: "bold", fontSize: "16px", whiteSpace: "nowrap" }}>{r}</TableCell>
+                                    <TableCell size="small" key={i} sx={{ color: "white", fontWeight: "bold", whiteSpace: "nowrap" }}>{r}</TableCell>
                                 )
                             })}
                         </TableRow>
@@ -141,7 +141,7 @@ const CustomDataGrid = ({ data, columns, rowsPerPage = 5 }) => {
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: i % 2 === 0 ? "background" : "secondaryBackground" }}
                             >
                                 {Object.keys(row)?.map((x, j) => (
-                                    <TableCell sx={{ fontSize: "16px", whiteSpace: "nowrap" }} key={j}>{row[x]}</TableCell>
+                                    <TableCell size="small" sx={{ whiteSpace: "nowrap" }} key={j}>{row[x]}</TableCell>
                                 ))}
                             </TableRow>
                         ))}

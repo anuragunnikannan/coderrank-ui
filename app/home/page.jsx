@@ -230,14 +230,14 @@ const page = () => {
                                     <>
                                         <Box sx={{ backgroundColor: "secondaryBackground", padding: "20px", borderRadius: "10px" }}>
                                             <Box className={styles.card_item_container}>
-                                                <Box>
+                                                <Box className={styles.card_item_left}>
                                                     <Typography variant="h6" sx={{ fontWeight: "900" }}>{r?.problem_statement_title}</Typography>
                                                     <Typography sx={{ fontWeight: "bold", color: getColor(r?.problem_statement_difficulty) }}>{r?.problem_statement_difficulty}</Typography>
                                                     <Typography sx={{ fontSize: "14px" }}>Tags: {r?.problem_statement_tags}</Typography>
                                                 </Box>
 
                                                 <Box>
-                                                    <Button sx={{ fontWeight: "bold" }} variant={r?.problem_statement_status === "solved" ? "outlined" : "contained"} endIcon={<CodeIcon />} onClick={() => router.push(`/home/code/${r?.problem_statement_uuid}`)}>{r?.problem_statement_status === "solved" ? "Solved" : "Solve"}</Button>
+                                                    <Button sx={{ fontWeight: "bold", width: "100px" }} variant={r?.problem_statement_status === "solved" ? "outlined" : "contained"} endIcon={<CodeIcon />} onClick={() => router.push(`/home/code/${r?.problem_statement_uuid}`)}>{r?.problem_statement_status === "solved" ? "Solved" : "Solve"}</Button>
                                                 </Box>
                                             </Box>
                                         </Box>

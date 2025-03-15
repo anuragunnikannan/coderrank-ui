@@ -117,7 +117,7 @@ const Navbar = () => {
             </Menu>
 
             <Box className={styles.navbar}>
-                <Typography variant="h4" sx={{ fontWeight: "900", color: "white" }}>CoderRank</Typography>
+                <Typography variant="h4" sx={{ fontWeight: "900", color: "white", cursor: "pointer" }} onClick={() => router.push("/home")}>CoderRank</Typography>
 
                 <Box className={styles.right_container}>
                     <Box onClick={toggleTheme}>

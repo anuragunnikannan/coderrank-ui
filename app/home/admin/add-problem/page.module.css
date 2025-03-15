@@ -18,6 +18,12 @@
     gap: 20px;
     border-radius: 10px;
     padding: 20px;
-    height: 70vh;
+    height: 60vh;
     overflow-y: scroll;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
