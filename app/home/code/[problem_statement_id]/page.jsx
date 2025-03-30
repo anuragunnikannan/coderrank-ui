@@ -38,26 +38,16 @@ const page = () => {
 	const [testCaseDetails, setTestCaseDetails] = useState({})
 
 	const handleChange = (value) => {
-		codeRef.current = value;
+		codeRef.current.value = value;
 	}
 
 	const handleLanguageChange = (oldValue, newValue) => {
 		let temp = { ...code };
 		// storing code for the currently selected language before changing it
-		temp[oldValue.language_id] = codeRef.current;
+		temp[oldValue.language_name] = codeRef.current;
 
-		// when user has already written something in the newly selected language
-		if (temp[newValue.language_id] !== undefined) {
-			codeRef.current = temp[newValue.language_id];
-			setCode(temp);
-		}
-		// when user has not written anything in the newly selected language
-		else {
-			codeRef.current = "";
-			temp[newValue.language_id] = "";
-			setCode(temp);
-		}
-
+		codeRef.current = temp[newValue.language_name];
+		setCode(temp);
 		setLanguage(newValue);
 	}
 
@@ -128,8 +118,13 @@ const page = () => {
 
 		api.get(`/get-language-options`)
 			.then((res) => {
+				let temp = {};
 				setLanguageOptions(res?.data);
 				setLanguage(res?.data[0]);
+				res?.data?.map((r, i) => {
+					temp[r?.language_name] = "";
+				})
+				setCode(temp);
 			})
 			.catch((err) => {
 				setOpen(true);
@@ -158,10 +153,10 @@ const page = () => {
 	useEffect(() => {
 		// when user is logged in and has not written any code for the selected language currently, fetch previously submitted code for the language (if any)
 
-		if (Cookies.get("isLoggedIn") && language?.language_id !== undefined && (code[language?.language_id] === "" || code[language?.language_id] === undefined)) {
+		if (Cookies.get("isLoggedIn") && language?.language_id !== undefined && code[language?.language_name] === "") {
 			api.get(`/get-users-code/${language?.language_id}/${problem_statement_id}`).then((res) => {
 				let temp = { ...code };
-				temp[language.language_id] = res?.data?.code;
+				temp[language.language_name] = res?.data?.code;
 				codeRef.current = res?.data?.code;
 				setCode(temp);
 			})
@@ -169,7 +164,7 @@ const page = () => {
 					setOpen(true);
 				})
 		}
-	}, [language, code])
+	}, [language])
 
 	return (
 		<>
@@ -327,7 +322,7 @@ const page = () => {
 							<Editor
 								language={language?.language_name?.toLowerCase()}
 								theme={mode === "light" ? "vs-light" : "vs-dark"}
-								value={code[language?.language_id]}
+								value={code[language?.language_name]}
 								onChange={handleChange}
 								options={{
 									fontFamily: "monospace",
