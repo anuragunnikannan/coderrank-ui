@@ -11,17 +11,14 @@ import { api } from '@/utils/apiFile';
 import Cookies from 'js-cookie';
 import { useParams } from 'next/navigation';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { handleClientRequest } from '@/utils/routeProtection';
 
 const page = () => {
 
 	const params = useParams();
 
-	handleClientRequest();
-
 	const problem_statement_id = params.problem_statement_id;
 
-	const [code, setCode] = useState("");
+	const [code, setCode] = useState({});
 	const codeRef = useRef(null);
 
 	const [input, setInput] = useState("");
@@ -42,6 +39,26 @@ const page = () => {
 
 	const handleChange = (value) => {
 		codeRef.current = value;
+	}
+
+	const handleLanguageChange = (oldValue, newValue) => {
+		let temp = { ...code };
+		// storing code for the currently selected language before changing it
+		temp[oldValue.language_id] = codeRef.current;
+
+		// when user has already written something in the newly selected language
+		if (temp[newValue.language_id] !== undefined) {
+			codeRef.current = temp[newValue.language_id];
+			setCode(temp);
+		}
+		// when user has not written anything in the newly selected language
+		else {
+			codeRef.current = "";
+			temp[newValue.language_id] = "";
+			setCode(temp);
+		}
+
+		setLanguage(newValue);
 	}
 
 	const runCode = () => {
@@ -139,16 +156,20 @@ const page = () => {
 	}, [])
 
 	useEffect(() => {
-		if (Cookies.get("isLoggedIn") && language?.language_id !== undefined) {
+		// when user is logged in and has not written any code for the selected language currently, fetch previously submitted code for the language (if any)
+
+		if (Cookies.get("isLoggedIn") && language?.language_id !== undefined && (code[language?.language_id] === "" || code[language?.language_id] === undefined)) {
 			api.get(`/get-users-code/${language?.language_id}/${problem_statement_id}`).then((res) => {
-				setCode(res?.data?.code);
+				let temp = { ...code };
+				temp[language.language_id] = res?.data?.code;
 				codeRef.current = res?.data?.code;
+				setCode(temp);
 			})
 				.catch((err) => {
 					setOpen(true);
 				})
 		}
-	}, [language])
+	}, [language, code])
 
 	return (
 		<>
@@ -252,11 +273,11 @@ const page = () => {
 
 															<AccordionDetails>
 																<Typography sx={{ fontWeight: "bold" }}>Input</Typography>
-																<Typography sx={{ whiteSpace: "pre-wrap" }}>{r?.input}</Typography>
+																<Typography sx={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{r?.input}</Typography>
 																<Typography sx={{ fontWeight: "bold" }}>Output</Typography>
-																<Typography sx={{ whiteSpace: "pre-wrap" }}>{r?.output}</Typography>
+																<Typography sx={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{r?.output}</Typography>
 																<Typography sx={{ fontWeight: "bold" }}>Expected Output</Typography>
-																<Typography sx={{ whiteSpace: "pre-wrap" }}>{r?.expected_output}</Typography>
+																<Typography sx={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{r?.expected_output}</Typography>
 															</AccordionDetails>
 														</Accordion>
 													)
@@ -276,8 +297,7 @@ const page = () => {
 								<Select
 									size="small"
 									value={language}
-									onChange={(e) => setLanguage(e.target.value)}
-									sx={{ width: "100px" }}
+									onChange={(e) => handleLanguageChange(language, e.target.value)}
 									inputProps={{
 										MenuProps: {
 											MenuListProps: {
@@ -307,7 +327,7 @@ const page = () => {
 							<Editor
 								language={language?.language_name?.toLowerCase()}
 								theme={mode === "light" ? "vs-light" : "vs-dark"}
-								value={code}
+								value={code[language?.language_id]}
 								onChange={handleChange}
 								options={{
 									fontFamily: "monospace",
