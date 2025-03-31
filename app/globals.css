@@ -3,3 +3,7 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+.ace_content {
+  font-family: monospace;
+}

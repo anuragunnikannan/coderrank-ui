@@ -1,6 +1,15 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import Editor from '@monaco-editor/react';
+
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-c_cpp";
+import "ace-builds/src-noconflict/theme-cloud9_night";
+import "ace-builds/src-noconflict/theme-cloud9_day";
+import "ace-builds/src-noconflict/ext-language_tools";
+
 import styles from "./page.module.css";
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Backdrop, Box, Button, Chip, CircularProgress, MenuItem, Select, Snackbar, Tab, TextField, Typography } from '@mui/material';
 import { ModeContext } from '../../../CustomThemeProvider';
@@ -38,7 +47,7 @@ const page = () => {
 	const [testCaseDetails, setTestCaseDetails] = useState({})
 
 	const handleChange = (value) => {
-		codeRef.current.value = value;
+		codeRef.current = value;
 	}
 
 	const handleLanguageChange = (oldValue, newValue) => {
@@ -291,6 +300,7 @@ const page = () => {
 							<Box className={styles.language_select_btn_container}>
 								<Select
 									size="small"
+									variant="outlined"
 									value={language}
 									onChange={(e) => handleLanguageChange(language, e.target.value)}
 									inputProps={{
@@ -319,18 +329,25 @@ const page = () => {
 							</Box>
 						</Box>
 						<Box className={styles.editor}>
-							<Editor
-								language={language?.language_name?.toLowerCase()}
-								theme={mode === "light" ? "vs-light" : "vs-dark"}
-								value={code[language?.language_name]}
+							<AceEditor
+								mode={language?.language_name?.toLowerCase() === "cpp" ? "c_cpp" : language?.language_name?.toLowerCase()}
+								theme={mode === "dark" ? "cloud9_night" : "cloud9_day"}
 								onChange={handleChange}
-								options={{
-									fontFamily: "monospace",
-									fontLigatures: "true",
-									minimap: { enabled: false },
-									fontSize: "14px"
-								}}
-							/>
+								width={"100%"}
+								height={"100%"}
+								fontSize={14}
+								showGutter={true}
+								highlightActiveLine={true}
+								value={codeRef.current}
+								setOptions={{
+									enableBasicAutocompletion: true,
+									enableLiveAutocompletion: true,
+									enableSnippets: true,
+									enableMobileMenu: true,
+									showLineNumbers: true,
+									tabSize: 4,
+									fontFamily: "monospace"
+								}} />
 						</Box>
 					</Box>
 				</Box>
