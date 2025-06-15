@@ -1,20 +1,10 @@
-"use client"
 import Image from "next/image";
 import styles from "./page.module.css";
-import Typewriter from 'typewriter-effect';
-import { Box, Button, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
+import { Box, Typography } from "@mui/material";
+import Typing from "./components/Typing/Typing";
+import Buttons from "./components/Buttons/Buttons";
 
 const page = () => {
-    const router = useRouter()
-
-    const handleLoginClick = () => {
-        if (Cookies.get("isLoggedIn"))
-            router.push("/home");
-        else
-            router.push("/auth");
-    }
 
     return (
         <>
@@ -23,14 +13,7 @@ const page = () => {
                     <Box className={styles.heroText}>
                         <Typography variant="h2" fontWeight={900}>CoderRank</Typography>
                         <Typography variant="h4">
-                            <Typewriter
-                                options={{
-                                    strings: ['Code for a Brighter Tomorrow', 'Create new and innovative solutions', 'Collaborate on different platforms'],
-                                    autoStart: true,
-                                    loop: true,
-                                    deleteSpeed: 10,
-                                }}
-                            />
+                            <Typing />
                         </Typography>
                         <Typography>
                             Learn to code, solve real-world problems, and join a global
@@ -38,8 +21,7 @@ const page = () => {
                         </Typography>
 
                         <Box className={styles.btn_container}>
-                            <Button variant="contained" sx={{ fontSize: '20px', height: "48px", fontWeight: "bold" }} onClick={() => router.push("/home")}>Try Now</Button>
-                            <Button variant="contained" sx={{ backgroundColor: "success.main", fontSize: '20px', height: "48px", fontWeight: "bold" }} onClick={handleLoginClick}>Login</Button>
+                            <Buttons />
                         </Box>
                     </Box>
 
